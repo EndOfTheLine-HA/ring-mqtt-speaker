@@ -7,13 +7,17 @@ independent of Ring and Home Assistant.
 
 ## Install on a Docker host
 
-Use the image archive for your platform on the release page, or build the
-image from the tagged source with `docker build -t ring-mqtt-speaker:0.1.0 .`.
+Download the Linux x86-64 (amd64) image archive and `config.example.json`
+from the [release page](https://github.com/EndOfTheLine-HA/ring-mqtt-speaker/releases/tag/v0.1.0).
+The release includes a SHA-256 checksum. To build from source instead,
+unpack the tagged source, run `docker build -t ring-mqtt-speaker:0.1.0 .`,
+and use the included `config.json` as the example. The prebuilt image was
+smoke-tested on amd64.
 
 ```sh
 docker load -i ring-mqtt-speaker-0.1.0-amd64.tar.gz
 mkdir -p ring-mqtt-data
-cp config.json ring-mqtt-data/config.json
+cp config.example.json ring-mqtt-data/config.json
 ```
 
 In the copied configuration, set `mqtt_url` to the broker that Home Assistant
