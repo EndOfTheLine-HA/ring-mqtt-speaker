@@ -1,0 +1,10 @@
+# This repository only ever runs inside a Linux container: the Dockerfile COPYs the whole
+# tree into the image. So every text file is checked out with LF on every platform.
+# text=auto still lets Git detect binary content, so images/*.png are left alone.
+#
+# eol=lf is load bearing, not cosmetic. The s6 service scripts under init/ have no file
+# extension, so a rule like "*.sh eol=lf" does not reach them. On a Windows checkout with
+# core.autocrlf=true they come out CRLF, their shebang reads "bashio\r", and s6 cannot exec
+# it. The container then starts and reports healthy while the ring-mqtt process never runs,
+# looping on "exec: fatal: unable to exec bashio: No such file or directory".
+* text=auto eol=lf
